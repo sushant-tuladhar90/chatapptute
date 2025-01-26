@@ -1,0 +1,39 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+  match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+  // Allow only authenticated users to read and write messages
+    match /chat_rooms/{chatRoomId}/messages/{messageId} {
+      allow read, write: if request.auth != null;
+    }
+    // Allow read and write for authenticated users
+    match /{document=**} {
+      allow read, write: if request.auth != null;
+    }
+
+    // Messages Collection Rule (assuming structure like /chats/{chatID}/messages/{messageID})
+    match /chats/{chatID}/messages/{messageID} {
+      // Allow read if the user is the sender or receiver
+      allow read: if request.auth.uid == resource.data.senderID || request.auth.uid == resource.data.receiverID;
+
+      // Allow update if the user is the receiver (since you're updating the message status to "delivered")
+      allow update: if request.auth.uid == resource.data.receiverID;
+
+      // Allow create if the user is the sender
+      allow create: if request.auth.uid == resource.data.senderID;
+    }
+  }
+  
+}
+
+
+
+
+
+
+
+
+
+
