@@ -242,6 +242,13 @@ class _ChatMessgeState extends State<ChatMessge> {
               padding: const EdgeInsets.only(left: .0),
               child: Row(
                 children: [
+                  Image.asset(
+              'assets/images/gallery_link.png',
+              width: 50,
+              height: 50,
+              scale: 0.8,
+            ),
+
                   Expanded(
                     child: MyTextfield(
                       controller: _messageController,

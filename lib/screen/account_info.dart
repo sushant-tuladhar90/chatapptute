@@ -40,7 +40,6 @@ class _AccountInfoState extends State<AccountInfo> {
 //   return null;
 // }
 
-
   Future<void> _loadUserData() async {
   User? user = _auth.currentUser;
   if (user != null) {

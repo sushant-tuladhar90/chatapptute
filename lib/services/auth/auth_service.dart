@@ -33,7 +33,6 @@ Future<String?> getUsername() async {
   }
 }
 
-
   //sign in
   Future<UserCredential> signInWithEmailAndPassword(
       String email, String password) async {
@@ -95,8 +94,6 @@ Future<void> _saveUserToFirestore(User user, String imageUrl, String username) a
     throw Exception('Error saving user info to Firestore: ${e.toString()}');
   }
 }
-
-
 
   //sign out
   Future<void> signOut() async {
